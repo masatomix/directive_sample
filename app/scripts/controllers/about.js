@@ -53,11 +53,16 @@ angular.module(APP_NAME)
     .directive('displayValue', function () {
         return {
             restrict: 'E',
-            template: '[{{name}}]',
+            // templateからのアクセス。
+            // controllerがもってる$scopeへは直接アクセス出来る
+            template: '[ {{getName()}} ]/[ {{name}} ]',
             scope: {
                 name: "="
             },
             controller: function ($scope) {
+                $scope.getName = function () {
+                    return $scope.name; // nameは$scopeにはいってる
+                };
                 console.log('call!');
             }
         };
