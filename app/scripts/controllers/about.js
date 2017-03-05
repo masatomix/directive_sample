@@ -55,13 +55,14 @@ angular.module(APP_NAME)
             restrict: 'E',
             // templateからのアクセス。
             // controllerがもってる$scopeへは直接アクセス出来る
-            template: '[ {{$ctrl.getName()}} ]/[ {{name}} ]',
+            template: '[ {{$ctrl.getName()}} ]/[ {{$ctrl.name}} ]',
             scope: {
                 name: "="
             },
-            controller: function ($scope) {
+            bindToController: true, //
+            controller: function () {
                 this.getName = function () {
-                    return $scope.name; // nameは$scopeにはいってる
+                    return this.name; // nameはthisでとれるようになる
                 };
                 console.log('call!');
             },
